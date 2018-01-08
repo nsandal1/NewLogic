@@ -11,7 +11,7 @@ class Piece():
         return self.position
 
     def getPiece(self):
-        return (self.name, self.num, self.color, self.status)
+        return (self.name, self.num, self.color)
     
     def movePiece(self, coord):
         self.position = coord
