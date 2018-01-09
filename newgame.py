@@ -1,6 +1,4 @@
 import Player
-import Coordinates
-import random
 
 
 
@@ -10,7 +8,7 @@ class Game():
         self.noPlayers=number
         self.players=[]
         self.names=[]
-        self.pieces=[]
+        self.allpieces=[]
 
         #create Player instances
         for i in range(number):
@@ -19,11 +17,11 @@ class Game():
         #fill Names list
         for i in self.players:
             self.names.append(i.retName())
-
-        #initialize dictionary of piece positions
-        self.coords=Coordinates.Coordinates(self.players)
-        
-                
+            
+        for item in self.players:
+            self.allpieces += item.pieces
+           
+              
 
     
     def winCondition(self):
@@ -38,29 +36,7 @@ class Game():
         ##get roll from front end
 
    
-    
-    def validateMove(self,piece):                 #decides if branching conditions are met
-        coord=piece.getPosition() 
-        if coord == (0,"y"):                    #just migrated!!!
-            return "promote"
-        elif self.coords.checkIfEmpty(coord):
-            return "continue"
-        elif self.coords.whoIsThere(coord)[0] == piece.getPiece()[0]:
-            return "combine"
-        else:
-            return "eat"
 
-
-        
-    def whereAre(self,player=0):
-        if player == 0:
-            for a,b in self.getDict().items():
-                print("{0}'s Piece #{1} is at Position {2}".format(a[0],a[1],b))
-        else:
-            for a,b in self.getDict().items():
-                if a[0] == player:
-                    print("{0}'s Piece #{1} is at Position {2}".format(a[0],a[1],b))
-            
 
     
     #Defining helper functions that may not be necessary outside of Troubleshooting
@@ -75,8 +51,40 @@ class Game():
     
     
     
-    def checkValid(self, piece, newcoor): 
-        if 
+    def checkValid(self, piece, roll, newcoord): 
+        if piece.pos % 1: 
+            if piece.pos + roll == newcoord:
+                return True
+            if piece.pos + roll >= 20:
+                if newcoord == 20:
+                    return True 
+       if (piece.pos - .1) % 1:
+            if piece.pos + roll == newcoord: 
+                return True
+            if piece.pos + roll > 15:
+                if piece.poss + roll -.1 == newcoord:
+                    return True
+       elif (piece.pos - 10) % .7:
+            if piece.pos + .7*roll == newcoord:
+                return True
+            if piece.pos + .7*roll > 14:
+                if newcoord == 20:
+                    return True
+       if piece.pos == 5:
+           if piece.pos + 4.1 + roll == newcoord:
+                return True
+       if piece.pos == 10:
+           if piece.pos + .7*roll == newcoord:
+                return True
+       if piece.pos == 12.1: 
+           if piece.pos + .7*roll == newcoord:
+                return True
+           if piece.pos + .7*roll > 14:
+                if newcoord == 20:
+                    return True
+       else:
+           return False
+                
       
 
 
@@ -86,11 +94,12 @@ class Game():
         turn=0
         roll= None
         piece = None
+       
             
         while not self.winCondition():
             
             print("\n\n[[[[ It is Player {0}'s turn ]]]] \n\n".format(turn+1))
-            self.whereAre(self.retPlayerN(turn).retName())
+            #self.whereAre(self.retPlayerN(turn).retName())
             
             roll = [self.roll()]                                #adds first roll value to list
             print("\nYou rolled a {0}!\n".format(roll[0]))
@@ -116,10 +125,19 @@ class Game():
             
                         print("You rolled a {0}!\n".format(currRoll))
                         piece = self.retPlayerN(turn).retPieceN(int(input("Select a Valid Piece to Move: ")))
-                        newcoor = tuple(input("Input valid coordinate: "))
-                        if checkValid(piece, newcoor) == YES: 
-                            piece.move(newcoor)
-                        
+                        newcoord = (input("Input valid coordinate: ")). ##frontend help
+                        if checkValid(piece, roll, newcoor): 
+                            for item in self.allpieces:
+                                if item.pos == piece.pos:
+                                    item.move(newcoor)
+                                    if item.pos == 20:
+                                        self.retPlayerN(turn).win += 1
+                                if item.pos == newcoord:
+                                    if item.name != piece.name:
+                                        item.pos = 0
+                                    
+                                    
+      ############                      
                        
                          
 
@@ -155,7 +173,7 @@ class Game():
 
                         else: print("You should never get here")
                         
-    
+    ############
             
             
             turn = (turn + 1) % self.noPlayers
