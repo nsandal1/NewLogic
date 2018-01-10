@@ -2,7 +2,7 @@ class Piece():
     
 
     def __init__(self, name, num, color):
-        self.position = 0
+        self.pos = 0
         self.num = num
         self.name = name
         self.color = color
