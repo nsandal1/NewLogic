@@ -21,8 +21,6 @@ class Game():
         for item in self.players:
             self.allpieces += item.pieces
            
-              
-
     
     def winCondition(self):
         for i in self.players:
@@ -35,11 +33,6 @@ class Game():
  
         ##get roll from front end
 
-   
-
-
-    
-    #Defining helper functions that may not be necessary outside of Troubleshooting
     def getNo(self):
         return self.noPlayers
     
@@ -48,8 +41,6 @@ class Game():
 
     def retPlayerN(self,n):
         return self.players[n]
-    
-    
     
     def checkValid(self, piece, roll, newcoord): 
         if piece.pos % 1: 
@@ -85,8 +76,6 @@ class Game():
        else:
            return False
                 
-      
-
 
     #Game develops from here
 
