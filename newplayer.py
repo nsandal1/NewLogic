@@ -8,7 +8,7 @@ class Player():
         self.order=order
         self.win = 0
         self.pieces = []
-        for i in 4:
+        for i in range(4):
             self.pieces.append(Piece(name, i, color)
             
 
