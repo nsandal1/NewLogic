@@ -130,37 +130,7 @@ class Game():
                        
                          
 
-                        #branching decisions should go here
-                        
-                        if self.validateMove(piece) == "continue":
-                                self.coords.updatePos(piece)
-                                print(piece.retLastPos(),"---->",piece.getPosition())
-
-                        elif self.validateMove(piece) == "eat":
-                                eaten = self.coords.whoIsThere(piece.getPosition())
-                                self.coords.updatePos(piece)
-                                print(piece.retLastPos(),"---->",piece.getPosition())
-                                player=self.players[self.names.index(eaten[0])]
-                                eatenPiece=player.retPieceN(eaten[1])        #redifined what piece is:redefined as piece being eaten...change var name?
-                                eatenPiece.eat()
-                                self.coords.updatePos(eatenPiece)
-                                                                                                                #need to uncombine
-                                self.whereAre()
-                                print("\n\n",self.retPlayerN(turn).retName(), "ate one of ", player.retName(),"'s pieces!")
- 
-                        elif self.validateMove(piece) == "promote":
-                                self.coords.updatePos(piece)
-                                self.player[self.names.index(self.piece.getPiece()[0])].incWin()
-                                #self.retPlayerN(turn).incPromoted()
-
-                                print("\n\n !!!!!  Player {0} has {1} Point(s)    !!!!".format(self.names[(turn)],self.retPlayerN(turn).retPromoted()))
-                                
-
-                        elif self.validateMove(piece) == "combine":
-                        
-                                piece.combine()
-
-                        else: print("You should never get here")
+                       
                         
     ############
             
