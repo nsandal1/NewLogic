@@ -113,7 +113,7 @@ class Game():
                         currRoll = roll.pop(roll.index(int(input("\nchoose your desired roll:{0}...".format(roll)))))
             
                         print("You rolled a {0}!\n".format(currRoll))
-                        piece = self.retPlayerN(turn).retPieceN(int(input("Select a Valid Piece to Move: ")))
+                        piece = self.retPlayerN(turn).retPieceN(int(input("Select a Valid Piece to Move: "))) ##frontend help
                         newcoord = (input("Input valid coordinate: ")). ##frontend help
                         if checkValid(piece, roll, newcoor): 
                             for item in self.allpieces:
